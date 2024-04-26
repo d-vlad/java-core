@@ -1,17 +1,25 @@
 package com.baeldung.shallow.copy;
 
+import java.util.List;
+
+import com.baeldung.Hobby;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@AllArgsConstructor
+@EqualsAndHashCode
 public class PersonShallowCopy {
 
-    public String name;
-    public int age;
+    private String name;
+    private int age;
+    private List<Hobby> hobbies;
 
-    public PersonShallowCopy(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonShallowCopy{" + "name='" + name + '\'' + ", age=" + age + '}';
+    public PersonShallowCopy(PersonShallowCopy person) {
+        this.name = person.name;
+        this.age = person.age;
+        this.hobbies = person.hobbies;
     }
 }

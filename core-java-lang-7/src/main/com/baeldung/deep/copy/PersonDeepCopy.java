@@ -1,26 +1,28 @@
 package com.baeldung.deep.copy;
 
-public class PersonDeepCopy implements Cloneable {
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public String name;
-    public int age;
+import com.baeldung.Hobby;
 
-    public PersonDeepCopy(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-    @Override
-    public PersonDeepCopy clone() {
-        try {
-            return (PersonDeepCopy) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
+@Data
+@AllArgsConstructor
+@EqualsAndHashCode
+public class PersonDeepCopy {
 
-    @Override
-    public String toString() {
-        return "PersonDeepCopy{" + "name='" + name + '\'' + ", age=" + age + '}';
+    private String name;
+    private int age;
+    private List<Hobby> hobbies;
+
+    public PersonDeepCopy(PersonDeepCopy person) {
+        this.name = person.name;
+        this.age = person.age;
+        this.hobbies = person.hobbies.stream()
+            .map(Hobby::new)
+            .collect(Collectors.toList());
     }
 }

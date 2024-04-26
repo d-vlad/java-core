@@ -1,22 +1,31 @@
 package com.baeldung.shallow.copy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
+
+import com.baeldung.Hobby;
 
 public class PersonShallowCopyTest {
 
     @Test
-    public void whenFieldsModified_ChangesReflectShallowCopy() {
-        PersonShallowCopy p = new PersonShallowCopy(null, 0);
-        assertNotNull(p);
+    public void assertThatChangesAreReflected() {
+        List<Hobby> hobbies = new ArrayList<>();
+        hobbies.add(new Hobby("Tennis", "Play some tennis"));
+        hobbies.add(new Hobby("Photography", "Photography is the art and practice of capturing images using a camera"));
 
-        PersonShallowCopy pCopy = p;
-        p.age = 10;
-        p.name = "test";
+        PersonShallowCopy p = new PersonShallowCopy("VladD", 32, hobbies);
+        PersonShallowCopy copy = new PersonShallowCopy(p);
+        assertEquals(2, copy.getHobbies()
+            .size());
 
-        assertEquals(10, pCopy.age);
-        assertEquals("test", pCopy.name);
+        p.getHobbies()
+            .add(new Hobby("Gardening", "Gardening is the cultivation and nurturing of plants, often done for pleasure and relaxation"));
+
+        assertEquals(3, copy.getHobbies()
+            .size());
     }
 }
