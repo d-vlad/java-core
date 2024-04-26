@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
-        <finalName>core-java-lang-5</finalName>
+        <finalName>core-java-lang-7</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
